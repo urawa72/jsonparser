@@ -3,7 +3,6 @@ package jsonparser
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"strconv"
 )
 
@@ -1188,7 +1187,7 @@ func GetString(data []byte, keys ...string) (val string, err error) {
 	}
 
 	if t != String {
-		return "", fmt.Errorf("Value is not a string: %s", string(v))
+		return "", errors.New("Value is not a string: " + string(v))
 	}
 
 	// If no escapes return raw content
@@ -1210,7 +1209,7 @@ func GetFloat(data []byte, keys ...string) (val float64, err error) {
 	}
 
 	if t != Number {
-		return 0, fmt.Errorf("Value is not a number: %s", string(v))
+		return 0, errors.New("Value is not a number: " + string(v))
 	}
 
 	return ParseFloat(v)
@@ -1226,7 +1225,7 @@ func GetInt(data []byte, keys ...string) (val int64, err error) {
 	}
 
 	if t != Number {
-		return 0, fmt.Errorf("Value is not a number: %s", string(v))
+		return 0, errors.New("Value is not a number: " + string(v))
 	}
 
 	return ParseInt(v)
@@ -1243,7 +1242,7 @@ func GetBoolean(data []byte, keys ...string) (val bool, err error) {
 	}
 
 	if t != Boolean {
-		return false, fmt.Errorf("Value is not a boolean: %s", string(v))
+		return false, errors.New("Value is not a boolean: " + string(v))
 	}
 
 	return ParseBoolean(v)
